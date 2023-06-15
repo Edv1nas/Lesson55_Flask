@@ -1,24 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <span class="title"><h1>{% block title %} The Posts Page {% endblock %}</h1></span>
-    <div class="content">
-        <h2>This is the posts Flask blueprint</h2>
-        {% for post in posts %}
-            <div class="post">
-                <p><b>#{{ post.id }}</b></p>
-                <p class="title">
-                    <b>
-                        <a href="#">
-                            {{ post.title }}
-                        </a>
-                    </b>
-                </p>
-                <div class="content">
-                    <p>{{ post.content }}</p>
-                </div>
-                <hr>
-            </div>
-        {% endfor %}
+<span class="title">
+    <h1>{% block title %} The Posts Page {% endblock %}</h1>
+</span>
+<div class="content">
+    <div class="new-post">
+        <form method="POST" action="#">
+            {{ form.hidden_tag() }}
+
+            <p>
+                {{ form.title.label(class="form-control-label") }}
+                {{ form.title(class="form-control") }}
+            </p>
+            <p>
+                {{ form.content.label(class="form-control-label") }}
+                {{ form.content(class="form-control") }}
+            </p>
+            <p>{{ form.submit }}</p>
+        </form>
     </div>
+    <h2>This is the posts Flask blueprint</h2>
+    {% for post in posts %}
+    <div class="post">
+        <p><b>#{{ post.id }}</b></p>
+        <p class="title">
+            <b>
+                <a href="#">
+                    {{ post.title }}
+                </a>
+            </b>
+        </p>
+        <div class="content">
+            <p>{{ post.content }}</p>
+        </div>
+        <hr>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
